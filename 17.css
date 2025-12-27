@@ -1,0 +1,18 @@
+.box1 {
+  background-color: rgb(255, 0, 0);
+  height: 130px;
+  width: 350px;
+  padding: 70px 40px 40px 40px;
+  border: 10px solid black;
+  border-radius: 20%;
+margin: auto;
+}
+.box2 {
+  background-color: rgb(70, 68, 209);
+  height: 200px;
+  width: 360px;
+  padding: 90px 51px 51px 51px;
+  border: 20px solid black;
+  border-radius: 47%;
+margin: auto;
+}
