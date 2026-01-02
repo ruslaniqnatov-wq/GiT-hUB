@@ -1,18 +1,30 @@
-.box1 {
-  background-color: rgb(255, 0, 0);
-  height: 130px;
-  width: 350px;
-  padding: 70px 40px 40px 40px;
-  border: 10px solid black;
-  border-radius: 20%;
-margin: auto;
+p {
+  color: aqua;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: capitalize;
 }
+
+.box1 {
+  background-color: rgb(103, 187, 243);
+  height: 130px;
+  width: 300px;
+  padding: 20px;
+  border: 3px solid black;
+  border-radius: 20%;
+  text-align: center;
+  margin: 20;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .box2 {
   background-color: rgb(70, 68, 209);
   height: 200px;
-  width: 360px;
-  padding: 90px 51px 51px 51px;
-  border: 20px solid black;
-  border-radius: 47%;
-margin: auto;
+  width: 250px;
+  padding: 15px;
+  border: 2px solid gray;
+  border-radius: 15%;
+  margin: auto;
+  text-align: justify;
 }
