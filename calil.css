@@ -29,6 +29,6 @@ table {
 th {
   background-color: blue;
 }
-th :hover {
+th:hover {
   background-color: aqua;
 }
