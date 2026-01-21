@@ -1,6 +1,6 @@
 form {
   width: 400px;
-  height: 710px;
+  height: 730px;
   text-align: center;
   margin: auto;
   background-color: azure;
@@ -12,15 +12,15 @@ form {
 }
 input {
   width: 300px;
-  margin-bottom: 60px;
+  margin-bottom: 50px;
   padding: 10px;
-  border-radius: 20px;
+  border-radius: 30px;
   border-color: blue;
 }
 label {
   display: block;
   margin-bottom: 6px;
-  font-size: large;
+  font-size:30px;
 }
 input:focus {
   border-color: black;
