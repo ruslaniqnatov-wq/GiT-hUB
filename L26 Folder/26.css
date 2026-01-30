@@ -1,0 +1,25 @@
+body {
+    background-color: blue;
+}
+.YqurSasiska {
+  height: 100px;
+  width: 300px;
+  background-color: rgb(168, 168, 247);
+border: 3px solid black;
+margin: auto;
+}
+.YqurSasiska{
+transform: skew( 10deg,20deg);
+}
+.YqurSasiska2 {
+  height: 100px;
+  width: 300px;
+  background-color: rgb(168, 168, 247);
+border: 3px solid black;
+margin: auto;
+}
+.YqurSasiska2{
+transform: rotatex(150deg);
+transform: rotatey(150deg);
+transform: rotatez(90deg)
+}
