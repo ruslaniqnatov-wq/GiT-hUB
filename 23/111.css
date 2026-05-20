@@ -1,0 +1,28 @@
+.asas {
+  height: 500px;
+  border-color: blue;
+  border: 3px solid black;
+  width: 400px;
+}
+img {
+  width: 100px;
+  height: 50px;
+  float: right;
+}
+a:visited {
+  color: blue;
+}
+a:hover {
+  color: brown;
+}
+a:link {
+  color: aqua;
+}
+p:before {
+content:counter(Calil) ;
+
+}   
+p::after{
+
+    content:counter(Calil);
+}                          

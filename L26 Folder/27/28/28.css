@@ -1,0 +1,42 @@
+.flex-container {
+  background-color: lightblue;
+  width: 500px;
+  height: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex-container div {
+  background-color: blue;
+  width: 100px;
+  height: 100px;
+  color: white;
+  margin: 10px;
+  border: 2px solid lightblue;
+  text-align: center;
+}
+.flex-container2 {
+  background-color: lightblue;
+  width: 500px;
+  height: 700px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.flex-container2 div {
+  background-color: blue;
+  width: 100px;
+  height: 100px;
+  color: white;
+  margin: 10px;
+  border: 2px solid lightblue;
+  text-align: center;
+  flex-grow: unset;
+}
+.flex-container2 .big2 {
+
+  flex-grow: 5;
+  color: brown;
+}

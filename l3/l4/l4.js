@@ -1,0 +1,16 @@
+let a = 10;
+let b = 5;
+console.log(a > b);    
+console.log(a < b);     
+console.log(a === 10);  
+console.log(b !== 10);  
+let age = 18;
+let hasID = true;
+console.log(age >= 18 && hasID);       
+console.log(age > 18 && hasID);        
+console.log(age === 18 && hasID === true); 
+let isStudent = false;
+let score = 60;
+console.log(isStudent || score > 50); 
+console.log(!isStudent);             
+console.log(score < 50 || isStudent); 

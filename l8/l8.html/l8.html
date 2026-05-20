@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Светофор</title>
+
+  <style>
+    .circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: gray;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="circle" id="circle"></div>
+
+  <button id="redBtn">Красный</button>
+  <button id="yellowBtn">Желтый</button>
+  <button id="greenBtn">Зеленый</button>
+
+  <p id="info">Выберите цвет</p>
+
+  <script>
+    let circle = document.getElementById("circle");
+    let info = document.getElementById("info");
+
+    document.getElementById("redBtn").onclick = function () {
+      circle.style.background = "red";
+      info.innerText = "Стой!";
+    };
+
+    document.getElementById("yellowBtn").onclick = function () {
+      circle.style.background = "yellow";
+      info.innerText = "Жди!";
+    };
+
+    document.getElementById("greenBtn").onclick = function () {
+      circle.style.background = "green";
+      info.innerText = "Можно идти!";
+    };
+  </script>
+
+</body>
+</html>

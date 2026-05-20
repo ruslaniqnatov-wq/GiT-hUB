@@ -18,8 +18,3 @@ transform: skew( 10deg,20deg);
 border: 3px solid black;
 margin: auto;
 }
-.YqurSasiska2{
-transform: rotatex(150deg);
-transform: rotatey(150deg);
-transform: rotatez(90deg)
-}
