@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Get in touch with Ruslan's Final Project." />
+    <title>Shop — Ruslan's Final Project</title>
+    <link rel="stylesheet" href="FinalProject.css" />
+  </head>
+  <body class="shop-page">
+    <header class="header">
+      <div class="container header_inner">
+        <a href="home.html" class="logo">Ruslan's Final Project</a>
+        <nav class="nav" aria-label="Main navigation">
+          <a href="home.html" class="nav_link">Home</a>
+          <a href="catalog.html" class="nav_link">Catalog</a>
+          <a href="about.html" class="nav_link">About</a>
+          <a href="Shop.html" class="nav_link active" aria-current="page">Shop</a>
+          <a href="account.html" class="nav_link">My account</a>
+        </nav>
+        <div class="header_action">
+          <a href="cart.html" class="cart-link" data-auth-cart>🛒 Cart</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="shop-main">
+      <div class="container shop-layout">
+        <section class="shop-intro">
+          <span class="eyebrow">WE'RE HERE TO HELP</span>
+          <h1>Write to us<span>.</span></h1>
+          <p>Have a question or need a hand choosing your next device? Send us a message — we'd love to hear from you.</p>
+          <div class="shop-contact-note">
+            <span class="shop-contact-icon" aria-hidden="true">✉</span>
+            <span>
+              <small>EMAIL US</small>
+              <a href="mailto:ruslaniqnatov@gmail.com">ruslaniqnatov@gmail.com</a>
+            </span>
+          </div>
+          <div class="shop-decoration shop-decoration-one" aria-hidden="true">✦</div>
+          <div class="shop-decoration shop-decoration-two" aria-hidden="true">✧</div>
+        </section>
+
+        <section class="shop-form-panel" aria-labelledby="shop-form-heading">
+          <div class="shop-form-heading">
+            <span class="eyebrow">DROP US A LINE</span>
+            <h2 id="shop-form-heading">Let's talk</h2>
+            <p>Fill in the details and we'll get your email ready.</p>
+          </div>
+          <form id="shop-contact-form" class="shop-form">
+            <label for="shop-name">Your name</label>
+            <input id="shop-name" name="name" type="text" placeholder="How should we call you?" autocomplete="name" required maxlength="100" />
+
+            <label for="shop-email">Your email</label>
+            <input id="shop-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required maxlength="254" />
+
+            <label for="shop-message">Your message</label>
+            <textarea id="shop-message" name="message" rows="4" placeholder="Tell us how we can help..." required maxlength="2000"></textarea>
+
+            <button class="shop-submit" type="submit">Send message <span aria-hidden="true">↗</span></button>
+            <p id="shop-form-status" class="shop-form-status" role="status" aria-live="polite"></p>
+            <small class="shop-privacy-note">Your email app will open with your message. Nothing is sent or stored on this page.</small>
+          </form>
+        </section>
+      </div>
+
+      <section class="container shop-products-section" aria-labelledby="my-products-heading">
+        <div class="shop-products-heading">
+          <div>
+            <span class="eyebrow">YOUR COLLECTION</span>
+            <h2 id="my-products-heading">My products</h2>
+            <p>Add and manage products saved to this browser and account.</p>
+          </div>
+          <button class="shop-create-toggle" id="shop-create-toggle" type="button" aria-expanded="false" aria-controls="shop-product-form-panel">
+            <span aria-hidden="true">＋</span> Create product
+          </button>
+        </div>
+
+        <div class="shop-product-form-panel" id="shop-product-form-panel" hidden>
+          <div class="shop-product-form-heading">
+            <div>
+              <span class="eyebrow">PRODUCT DETAILS</span>
+              <h3 id="shop-product-form-title">Create product</h3>
+            </div>
+            <button class="shop-form-close" id="shop-product-cancel" type="button" aria-label="Cancel">×</button>
+          </div>
+          <form id="shop-product-form" class="shop-product-form">
+            <label for="shop-product-name">Product name</label>
+            <input id="shop-product-name" name="name" type="text" placeholder="e.g. Studio Headphones" maxlength="120" required />
+
+            <label for="shop-product-price">Price (AZN)</label>
+            <input id="shop-product-price" name="price" type="number" min="0.01" step="0.01" placeholder="299.99" required />
+
+            <label for="shop-product-category">Category</label>
+            <select id="shop-product-category" name="category" required>
+              <option value="">Choose a category</option>
+              <option>Laptops</option>
+              <option>Phones</option>
+              <option>Audio</option>
+              <option>Accessories</option>
+              <option>Other</option>
+            </select>
+
+            <label for="shop-product-image">Image URL <span>(optional)</span></label>
+            <input id="shop-product-image" name="imageUrl" type="url" placeholder="https://example.com/product.jpg" maxlength="1000" />
+
+            <label for="shop-product-description">Description</label>
+            <textarea id="shop-product-description" name="description" rows="3" placeholder="Tell us a little about this product..." maxlength="1000"></textarea>
+
+            <div class="shop-product-form-actions">
+              <button class="shop-submit" id="shop-product-save" type="submit">Create product <span aria-hidden="true">↗</span></button>
+              <button class="shop-product-cancel" type="button" id="shop-product-cancel-secondary">Cancel</button>
+            </div>
+            <p class="shop-form-status" id="shop-product-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <div class="shop-product-grid" id="shop-product-list" aria-live="polite"></div>
+        <p class="shop-storage-note">Products are saved in this browser and are not published to the shared catalog.</p>
+      </section>
+    </main>
+
+    <footer class="home-footer shop-footer">
+      <div class="container">
+        <div class="home-footer-bottom">
+          <span>© 2026 Ruslan's Final Project</span>
+          <a href="home.html">Back to home ↑</a>
+        </div>
+      </div>
+    </footer>
+    <script src="shop.js"></script>
+    <script src="auth-ui.js"></script>
+  </body>
+</html>

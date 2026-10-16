@@ -76,23 +76,17 @@ function renderReviews(reviews, totalElements) {
     reviewsBox.innerHTML = `
         <div class="review-list">
             ${reviews.map((review) => {
-                const reviewer = review.userId != null
-                    ? `Покупатель #${escapeHtml(review.userId)}`
-                    : "Покупатель";
                 const title = review.title?.trim() || "Отзыв о товаре";
                 const comment = review.comment?.trim() || "Покупатель не добавил текстовый комментарий.";
-                const initial = review.userId == null
-                    ? "П"
-                    : escapeHtml(String(review.userId).slice(-2));
 
                 return `
                     <article class="review-card">
-                        <div class="review-avatar" aria-hidden="true">${initial}</div>
+                        <div class="review-avatar" aria-hidden="true">П</div>
                         <div class="review-content">
                             <div class="review-card-heading">
                                 <div>
                                     <h3>${escapeHtml(title)}</h3>
-                                    <span class="review-author">${reviewer}</span>
+                                    <span class="review-author">Покупатель</span>
                                 </div>
                                 <span class="review-label"><span aria-hidden="true">✦</span> Отзыв</span>
                             </div>
