@@ -2602,18 +2602,18 @@ footer:not(.home-footer) { color: var(--muted); }
 /* COLOR STORY — vivid, playful storefront */
 
 :root {
-  --navy: #24134f;
-  --blue: #6546ff;
-  --yellow: #ffcf42;
-  --background: #faf8ff;
-  --text: #28213d;
-  --muted: #77718d;
-  --border: #e8e1f3;
+  --navy: #211247;
+  --blue: #5c40e8;
+  --yellow: #f2c13a;
+  --background: #f5f2fa;
+  --text: #251e38;
+  --muted: #706982;
+  --border: #e1daed;
   --white: #ffffff;
   --success: #148b72;
-  --coral: #ff6d76;
-  --mint: #63ddc2;
-  --lavender: #eee9ff;
+  --coral: #ed626d;
+  --mint: #55cdb2;
+  --lavender: #e7e1f7;
   --fx-radius: 22px;
   --fx-radius-sm: 14px;
   --fx-speed: 280ms cubic-bezier(.2, .75, .25, 1);
