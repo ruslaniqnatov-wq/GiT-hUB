@@ -12,12 +12,11 @@
       <div class="container header_inner">
         <a href="home.html" class="logo">Ruslan's Final Project</a>
 
-        <nav class="nav">
-          <a href="home.html" class="nav_link">главная</a>
-          <a href="catalog.html" class="nav_link">каталог</a>
-          <a href="about.html" class="nav_link">о нас</a>
-          <a href="#login" class="nav_link">войти</a>
-          <a href="account.html" class="nav_link">Мой аккаунт</a>
+        <nav class="nav" aria-label="Главная навигация">
+          <a href="home.html" class="nav_link">Главная</a>
+          <a href="catalog.html" class="nav_link">Каталог</a>
+          <a href="about.html" class="nav_link">О нас</a>
+          <a href="account.html" class="nav_link active" aria-current="page">Мой аккаунт</a>
         </nav>
         
 
@@ -27,20 +26,71 @@
       </div>
     </header>
 
-    <main class="account">
+    <main class="account account-dashboard">
       <div class="container">
-        <h1>Мой аккаунт</h1>
-        <p>Информация о твоём профиле</p>
+        <div class="account-heading">
+          <div>
+            <span class="eyebrow">ТВОЁ ПРОСТРАНСТВО</span>
+            <h1>Мой аккаунт</h1>
+            <p>Управляй профилем и возвращайся к покупкам в любой момент.</p>
+          </div>
+          <span class="account-heading-mark" aria-hidden="true">✦</span>
+        </div>
 
-        <div id="profile">Загрузка профиля...</div>
+        <div class="account-dashboard-grid">
+          <section class="account-profile-panel" aria-labelledby="profile-heading">
+            <div class="account-profile-banner">
+              <span>RUSLAN'S FINAL PROJECT</span>
+              <span class="account-profile-orbit" aria-hidden="true">✧</span>
+            </div>
+            <div class="account-profile-body">
+              <div class="account-avatar" id="profile-avatar" aria-hidden="true">R</div>
+              <div class="account-profile-title">
+                <span class="account-status"><i aria-hidden="true"></i> Аккаунт активен</span>
+                <h2 id="profile-heading">Твой профиль</h2>
+                <p>Личная информация и данные для связи</p>
+              </div>
 
-        <button type="button" onclick="logout()">Выйти из аккаунта</button>
+              <div id="profile" class="account-profile-details" aria-live="polite">
+                <p class="account-loading">Загружаем твой профиль...</p>
+              </div>
+
+              <button class="account-logout" type="button" onclick="logout()">
+                <span aria-hidden="true">↪</span> Выйти из аккаунта
+              </button>
+            </div>
+          </section>
+
+          <aside class="account-quick-panel" aria-label="Быстрые действия">
+            <span class="eyebrow">БЫСТРЫЙ ДОСТУП</span>
+            <h2>Продолжим?</h2>
+            <p>Твои следующие шаги — в одном месте.</p>
+
+            <a class="account-shortcut account-shortcut-catalog" href="catalog.html">
+              <span class="account-shortcut-icon" aria-hidden="true">▦</span>
+              <span><strong>Открыть каталог</strong><small>Найти новое устройство</small></span>
+              <span class="account-shortcut-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="account-shortcut account-shortcut-cart" href="cart.html">
+              <span class="account-shortcut-icon" aria-hidden="true">🛍</span>
+              <span><strong>Моя корзина</strong><small>Посмотреть выбранное</small></span>
+              <span class="account-shortcut-arrow" aria-hidden="true">↗</span>
+            </a>
+          </aside>
+        </div>
+
+        <section class="profile-cart account-cart-panel" aria-labelledby="account-cart-heading">
+          <div class="account-cart-heading">
+            <div>
+              <span class="eyebrow">СОХРАНЁННЫЙ ВЫБОР</span>
+              <h2 id="account-cart-heading">Моя корзина</h2>
+            </div>
+            <a href="cart.html">Перейти к корзине <span aria-hidden="true">↗</span></a>
+          </div>
+          <div id="cart-container"></div>
+        </section>
       </div>
     </main>
-    <section class="profile-cart">
-    <h2>Моя корзина</h2>
-    <div id="cart-container"></div>
-</section>
 
     <footer class="footer" id="login">
       <div class="container">

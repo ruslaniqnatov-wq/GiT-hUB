@@ -29,16 +29,30 @@ async function loadProfile() {
         const user = await response.json();
 
         box.innerHTML = `
-            <p>Имя: <span id="user-name"></span></p>
-            <p>Фамилия: <span id="user-surname"></span></p>
-            <p>Логин: <span id="user-username"></span></p>
-            <p>Email: <span id="user-email"></span></p>
+            <div class="account-profile-field">
+                <span class="account-field-icon" aria-hidden="true">✦</span>
+                <span class="account-field-copy"><small>Имя</small><strong id="user-name"></strong></span>
+            </div>
+            <div class="account-profile-field">
+                <span class="account-field-icon account-field-icon-coral" aria-hidden="true">◈</span>
+                <span class="account-field-copy"><small>Фамилия</small><strong id="user-surname"></strong></span>
+            </div>
+            <div class="account-profile-field">
+                <span class="account-field-icon account-field-icon-mint" aria-hidden="true">@</span>
+                <span class="account-field-copy"><small>Логин</small><strong id="user-username"></strong></span>
+            </div>
+            <div class="account-profile-field account-profile-field-email">
+                <span class="account-field-icon account-field-icon-yellow" aria-hidden="true">✉</span>
+                <span class="account-field-copy"><small>Email</small><strong id="user-email"></strong></span>
+            </div>
         `;
 
         document.getElementById("user-name").textContent = user.name || "";
         document.getElementById("user-surname").textContent = user.surname || "";
         document.getElementById("user-username").textContent = user.username || "";
         document.getElementById("user-email").textContent = user.email || "";
+        document.getElementById("profile-avatar").textContent =
+            (user.name || user.username || "R").trim().charAt(0).toLocaleUpperCase();
 
     } catch (error) {
         console.error("Ошибка загрузки профиля:", error);
