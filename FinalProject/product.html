@@ -24,11 +24,23 @@
             </div>
         </div>
     </header>
-    <div class="container">
-        <div class="product" id="product"></div>
-        <h2>Отзывы</h2>
-        <div id="reviews"></div>
-    </div>
+    <main class="container product-page">
+        <a class="back-link product-back-link" href="catalog.html">← Вернуться в каталог</a>
+        <div class="product" id="product" aria-live="polite" aria-busy="true"></div>
+
+        <section class="product-reviews" aria-labelledby="reviews-heading">
+            <div class="reviews-heading">
+                <div>
+                    <span class="eyebrow">МНЕНИЯ ПОКУПАТЕЛЕЙ</span>
+                    <h2 id="reviews-heading">Отзывы о товаре</h2>
+                </div>
+                <div class="reviews-summary" id="reviews-summary" aria-live="polite"></div>
+            </div>
+            <div id="reviews" aria-live="polite" aria-busy="true">
+                <p class="reviews-message">Загружаем отзывы...</p>
+            </div>
+        </section>
+    </main>
 
 <script src="product.js"></script>
 <script src="auth-ui.js"></script>
