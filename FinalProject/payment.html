@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Оплата заказа</title>
+    <link rel="stylesheet" href="FinalProject.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-inner">
+        <a href="home.html" class="logo">Ruslan's Final Project</a>
+
+        <nav>
+          <a href="home.html">Главная</a>
+          <a href="catalog.html">Каталог</a>
+          <a href="about.html">О нас</a>
+          <a href="account.html">Аккаунт</a>
+        </nav>
+        <div class="header_action">
+          <a href="cart.html" class="cart-link" data-auth-cart>🛒 Корзина</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="payment-page">
+      <a href="catalog.html" class="back-link"> ← Вернуться в магазин </a>
+
+      <div class="payment-layout">
+        <section class="payment-card">
+          <div class="section-title">
+            <div>
+              <span class="small-title">CHECKOUT</span>
+              <h1>Оформление заказа</h1>
+              <p>Заполните данные для демонстрации оплаты.</p>
+            </div>
+
+            <div class="lock-icon">✓</div>
+          </div>
+
+          <div class="demo-notice">
+            <strong>Демо-режим</strong>
+            <p>
+              Оплата не производится. Не вводите настоящие банковские данные.
+            </p>
+          </div>
+
+          <form id="payment-form">
+            <h2>Контактная информация</h2>
+
+            <label for="fullname">Имя и фамилия</label>
+            <input
+              type="text"
+              id="fullname"
+              placeholder="Например, Ali Mammadov"
+              required
+            />
+
+            <label for="email">Электронная почта</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="example@mail.com"
+              required
+            />
+
+            <h2 class="payment-heading">Способ оплаты</h2>
+
+            <label class="method active">
+              <input type="radio" name="payment" value="card" checked />
+              <span class="method-icon">▣</span>
+              <span>
+                <strong>Банковская карта</strong>
+                <small>Только демонстрация интерфейса</small>
+              </span>
+            </label>
+
+            <label class="method">
+              <input type="radio" name="payment" value="cash" />
+              <span class="method-icon">₼</span>
+              <span>
+                <strong>Оплата при получении</strong>
+                <small>Демонстрационный вариант</small>
+              </span>
+            </label>
+
+            <div id="card-fields">
+              <label for="card-number">Номер тестовой карты</label>
+              <input
+                type="text"
+                id="card-number"
+                placeholder="0000 0000 0000 0000"
+                maxlength="19"
+                inputmode="numeric"
+              />
+
+              <div class="input-row">
+                <div>
+                  <label for="expiry">Срок действия</label>
+                  <input
+                    type="text"
+                    id="expiry"
+                    placeholder="ММ/ГГ"
+                    maxlength="5"
+                    inputmode="numeric"
+                  />
+                </div>
+
+                <div>
+                  <label for="cvv">CVV (демо)</label>
+                  <input
+                    type="password"
+                    id="cvv"
+                    placeholder="000"
+                    maxlength="3"
+                    inputmode="numeric"
+                  />
+                </div>
+              </div>
+
+              <p class="security-note">
+                Данные карты никуда не отправляются и не сохраняются.
+              </p>
+            </div>
+
+            <button type="submit" class="pay-button">
+              Подтвердить заказ →
+            </button>
+
+            <p id="payment-message" class="payment-message"></p>
+          </form>
+        </section>
+
+        <aside class="order-card">
+          <span class="small-title">YOUR ORDER</span>
+          <h2>Ваш заказ</h2>
+
+          <div class="order-product">
+            <div class="product-icon">🛍️</div>
+            <div>
+              <strong>Товары из корзины</strong>
+              <p id="product-count">0 товаров</p>
+            </div>
+          </div>
+
+          <div class="price-line">
+            <span>Количество товаров</span>
+            <strong id="quantity">0</strong>
+          </div>
+
+          <div class="price-line total">
+            <span>Итого</span>
+            <strong id="total-price">0 AZN</strong>
+          </div>
+
+          <p class="order-note">
+            Итоговая сумма рассчитана по данным корзины, если они сохранены в
+            localStorage.
+          </p>
+
+          <a href="catalog.html" class="continue-link"> Продолжить покупки </a>
+        </aside>
+      </div>
+    </main>
+
+    <footer>
+      <p>© 2026 Ruslan's Final Project. Все права защищены.</p>
+      <span>Демонстрационный интернет-магазин</span>
+    </footer>
+
+    <script>
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      const quantity = cart.reduce(
+        (sum, product) => sum + (Number(product.quantity) || 1),
+        0,
+      );
+
+      const total = cart.reduce(
+        (sum, product) =>
+          sum + (Number(product.price) || 0) * (Number(product.quantity) || 1),
+        0,
+      );
+
+      document.getElementById("quantity").textContent = quantity;
+      document.getElementById("product-count").textContent =
+        quantity +
+        (quantity === 1
+          ? " товар"
+          : quantity >= 2 && quantity <= 4
+            ? " товара"
+            : " товаров");
+
+      document.getElementById("total-price").textContent =
+        total.toFixed(2) + " AZN";
+
+      const paymentOptions = document.querySelectorAll('input[name="payment"]');
+
+      const cardFields = document.getElementById("card-fields");
+
+      paymentOptions.forEach((option) => {
+        option.addEventListener("change", () => {
+          cardFields.style.display =
+            option.value === "card" && option.checked ? "block" : "none";
+
+          document.querySelectorAll(".method").forEach((method) => {
+            method.classList.toggle(
+              "active",
+              method.querySelector("input").checked,
+            );
+          });
+        });
+      });
+
+      document
+        .getElementById("payment-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          document.getElementById("payment-message").textContent =
+            "Демо: заказ оформлен для проверки интерфейса. Деньги не списаны.";
+
+          document.getElementById("payment-message").className =
+            "payment-message success";
+        });
+    </script>
+    <script src="auth-ui.js"></script>
+  </body>
+</html>

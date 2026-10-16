@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Мой аккаунт</title>
+    <link rel="stylesheet" href="FinalProject.css" />
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="container header_inner">
+        <a href="home.html" class="logo">Ruslan's Final Project</a>
+
+        <nav class="nav">
+          <a href="home.html" class="nav_link">главная</a>
+          <a href="catalog.html" class="nav_link">каталог</a>
+          <a href="about.html" class="nav_link">о нас</a>
+          <a href="#login" class="nav_link">войти</a>
+          <a href="account.html" class="nav_link">Мой аккаунт</a>
+        </nav>
+        
+
+        <div class="header_action">
+          <a href="cart.html" class="cart-link" data-auth-cart>корзина</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="account">
+      <div class="container">
+        <h1>Мой аккаунт</h1>
+        <p>Информация о твоём профиле</p>
+
+        <div id="profile">Загрузка профиля...</div>
+
+        <button type="button" onclick="logout()">Выйти из аккаунта</button>
+      </div>
+    </main>
+    <section class="profile-cart">
+    <h2>Моя корзина</h2>
+    <div id="cart-container"></div>
+</section>
+
+    <footer class="footer" id="login">
+      <div class="container">
+        <p>
+          © 2026 Final Project. Все права защищены. Этот сайт создан для
+          демонстрационных целей. Контактная почта: ruslaniqnatov@gmail.com.
+          Время обновления: октябрь 2026. Конфиденциальность: мы не собираем
+          личные данные, кроме случаев, когда вы сами их отправляете. Спасибо,
+          что заглянули!.
+        </p>
+      </div>
+    </footer>
+
+
+    <script src="account.js"></script>
+    <script src="auth-ui.js"></script>
+  </body>
+</html>

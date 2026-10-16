@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог — Ruslan's Final Project</title>
+    <link rel="stylesheet" href="FinalProject.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container header_inner">
+            <a href="home.html" class="logo">Ruslan's Final Project</a>
+            <nav class="nav">
+                <a href="home.html" class="nav_link">главная</a>
+                <a href="catalog.html" class="nav_link">каталог</a>
+                <a href="about.html" class="nav_link">о нас</a>
+                <a href="login.html" class="nav_link">войти</a>
+                <a href="account.html" class="nav_link">Мой аккаунт </a>
+            </nav>
+            <div class="header_action">
+                <a href="cart.html" class="cart-link" data-auth-cart>корзина</a>
+            </div>
+        </div>
+    </header>
+    <main class="container catalog-page">
+        <section class="catalog-intro">
+            <span class="eyebrow">ТЕХНИКА ДЛЯ ТВОИХ ИДЕЙ</span>
+            <h1>Найди своё.</h1>
+            <p>Выбирай гаджеты по категориям, цене и оценкам покупателей.</p>
+        </section>
+
+        <section class="catalog-controls" aria-label="Поиск и фильтры товаров">
+            <label class="catalog-search">
+                <span aria-hidden="true">⌕</span>
+                <input type="search" placeholder="Поиск по товарам..." id="search" oninput="searchProducts()">
+            </label>
+
+            <label class="catalog-rating">
+                <span>Рейтинг</span>
+                <select id="rating-filter" onchange="filterByRating(this.value)" aria-label="Минимальный рейтинг">
+                    <option value="0">Любой рейтинг</option>
+                    <option value="4">★★★★☆ 4+ звезды</option>
+                    <option value="3">★★★☆☆ 3+ звезды</option>
+                    <option value="2">★★☆☆☆ 2+ звезды</option>
+                    <option value="1">★☆☆☆☆ 1+ звезда</option>
+                </select>
+            </label>
+
+            <button class="chip catalog-sort" type="button" onclick="sortByPrice()">Сначала дешевле ↗</button>
+            <button class="catalog-reset" type="button" onclick="resetCatalogFilters()">Сбросить</button>
+        </section>
+
+        <section class="catalog-categories" aria-label="Категории товаров">
+            <div class="catalog-section-heading">
+                <h2>Исследуй категории</h2>
+                <p>Выбери направление и найди подходящее устройство.</p>
+            </div>
+            <div id="categories"></div>
+        </section>
+
+        <div class="catalog-results">
+            <h2>Каталог устройств</h2>
+            <p id="catalog-count" aria-live="polite"></p>
+        </div>
+        <div class="products catalog-products" id="products" aria-live="polite"></div>
+    </main>
+    <script src="catalog.js"></script>
+    <script src="auth-ui.js"></script>
+</body>
+
+</html>

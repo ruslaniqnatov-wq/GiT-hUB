@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Корзина</title>
+    <link rel="stylesheet" href="FinalProject.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container header_inner">
+        <a href="home.html" class="logo">Ruslan's Final Project</a>
+
+        <nav class="nav">
+          <a href="home.html" class="nav_link">Главная</a>
+          <a href="catalog.html" class="nav_link">Каталог</a>
+          <a href="about.html" class="nav_link">О нас</a>
+          <a href="login.html" class="nav_link">Войти</a>
+          <a href="account.html" class="nav_link">Мой аккаунт</a>
+        </nav>
+
+        <a href="cart.html" class="cart-link" data-auth-cart>
+          🛒 Корзина <span id="cart-count">0</span>
+        </a>
+      </div>
+    </header>
+
+    <main class="container cart-page">
+      <h1>Моя корзина</h1>
+
+      <div id="cart-items"></div>
+
+      <div class="cart-summary">
+        <h2>Итого: <span id="cart-total">0.00</span> AZN</h2>
+        <button class="clear-btn" onclick="clearCart()">
+          Очистить корзину
+        </button>
+        <button type="button" onclick="window.location.href = 'payment.html'">
+          Оформить заказ →
+        </button>
+        <a href="catalog.html" class="back-link"> ← Вернуться в каталог </a>
+      </div>
+    </main>
+
+    <script src="cart.js"></script>
+    <script src="auth-ui.js"></script>
+  </body>
+</html>

@@ -1,0 +1,326 @@
+
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruslan's Final Project — Магазин техники</title>
+    <link rel="stylesheet" href="FinalProject.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header" id="top">
+        <div class="container header_inner">
+
+            <a href="home.html" class="logo">Ruslan's Final Project</a>
+
+            <nav class="nav">
+                <a href="home.html" class="nav_link active">Главная</a>
+                <a href="catalog.html" class="nav_link">Каталог</a>
+                <a href="about.html" class="nav_link">О нас</a>
+                <a href="#advantages" class="nav_link">Преимущества</a>
+                <a href="account.html" class="nav_link">Мой аккаунт</a>
+            </nav>
+
+            <div class="header_action">
+                <a href="cart.html" class="cart-link" data-auth-cart>
+                    🛒 Корзина
+                </a>
+            </div>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- HERO -->
+        <section class="home-hero">
+            <div class="container hero-grid">
+
+                <div class="hero-content">
+                    <span class="hero-label">
+                        ✦ ТЕХНОЛОГИИ БУДУЩЕГО
+                    </span>
+
+                    <h1>
+                        Техника,<br>
+                        которая меняет<br>
+                        <span>твои правила.</span>
+                    </h1>
+
+                    <p>
+                        Открой для себя мир современных устройств.
+                        Выбирай любимые бренды, находи новинки
+                        и собирай свою идеальную коллекцию.
+                    </p>
+
+                    <div class="hero-buttons">
+                        <a href="catalog.html" class="btn">
+                            Смотреть каталог <span>→</span>
+                        </a>
+
+                        <a href="#products-section" class="hero-secondary">
+                            Популярные товары ↓
+                        </a>
+                    </div>
+
+                    <div class="hero-stats">
+                        <div>
+                            <strong>01</strong>
+                            <span>Современный дизайн</span>
+                        </div>
+
+                        <div>
+                            <strong>02</strong>
+                            <span>Любимые бренды</span>
+                        </div>
+
+                        <div>
+                            <strong>03</strong>
+                            <span>Удобные покупки</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="hero-glow"></div>
+
+                    <div class="hero-image">
+                        <img
+                            src="https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&w=1100&q=85"
+                            alt="Современная электроника"
+                        >
+                    </div>
+
+                    <div class="floating-card floating-card-top">
+                        <span class="floating-icon">✦</span>
+                        <div>
+                            <strong>Новый уровень</strong>
+                            <small>Технологии каждый день</small>
+                        </div>
+                    </div>
+
+                    <div class="floating-card floating-card-bottom">
+                        <span class="floating-dot"></span>
+                        <div>
+                            <strong>Твоя следующая покупка</strong>
+                            <small>Уже ждёт тебя в каталоге</small>
+                        </div>
+                    </div>
+
+                    <div class="hero-number">RUSLAN'S FINAL PROJECT / 2026</div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CATEGORY STRIP -->
+        <section class="category-section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="eyebrow">ИССЛЕДУЙ МИР ТЕХНИКИ</span>
+                        <h2>Найди своё</h2>
+                    </div>
+
+                    <a href="catalog.html" class="text-link">
+                        Весь каталог →
+                    </a>
+                </div>
+
+                <div class="category-grid">
+
+                    <a href="catalog.html" class="category-card category-blue">
+                        <span class="category-number">01 / DEVICES</span>
+                        <span class="category-emoji">💻</span>
+                        <h3>Ноутбуки</h3>
+                        <p>Для работы, учёбы и новых идей</p>
+                        <span class="category-arrow">↗</span>
+                    </a>
+
+                    <a href="catalog.html" class="category-card category-yellow">
+                        <span class="category-number">02 / MOBILE</span>
+                        <span class="category-emoji">📱</span>
+                        <h3>Смартфоны</h3>
+                        <p>Технологии всегда под рукой</p>
+                        <span class="category-arrow">↗</span>
+                    </a>
+
+                    <a href="catalog.html" class="category-card category-dark">
+                        <span class="category-number">03 / GADGETS</span>
+                        <span class="category-emoji">🎧</span>
+                        <h3>Гаджеты</h3>
+                        <p>Детали, которые решают всё</p>
+                        <span class="category-arrow">↗</span>
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- PRODUCTS -->
+        <section class="section products-section" id="products-section">
+            <div class="container">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="eyebrow">ВЫБОР ПОКУПАТЕЛЕЙ</span>
+                        <h2>Популярные товары<span class="yellow-dot">.</span></h2>
+                        <p class="section-description">
+                            Техника, на которую стоит обратить внимание.
+                        </p>
+                    </div>
+
+                    <a href="catalog.html" class="all-products">
+                        Все товары <span>→</span>
+                    </a>
+                </div>
+
+                <!-- home.js загружает товары сюда -->
+                <div class="products" id="products"></div>
+
+            </div>
+        </section>
+
+
+        <!-- PROMO BANNER -->
+        <section class="promo-section">
+            <div class="container">
+
+                <div class="promo-banner">
+                    <div class="promo-content">
+                        <span class="promo-label">YOUR NEXT UPGRADE</span>
+
+                        <h2>
+                            Готов к чему-то<br>
+                            <span>новому?</span>
+                        </h2>
+
+                        <p>
+                            Найди устройство, которое подойдёт именно тебе.
+                            Изучай ассортимент и выбирай свой следующий гаджет.
+                        </p>
+
+                        <a href="catalog.html" class="promo-button">
+                            Выбрать устройство ↗
+                        </a>
+                    </div>
+
+                    <div class="promo-decoration">
+                        <div class="promo-circle circle-one"></div>
+                        <div class="promo-circle circle-two"></div>
+                        <div class="promo-symbol">L.</div>
+                        <span class="promo-caption">TECH / STYLE / FUTURE</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ADVANTAGES -->
+        <section class="advantages-section" id="advantages">
+            <div class="container">
+
+                <div class="section-heading">
+                    <div>
+                        <span class="eyebrow">ПОЧЕМУ RUSLAN'S FINAL PROJECT?</span>
+                        <h2>Покупки без лишнего.</h2>
+                    </div>
+                </div>
+
+                <div class="advantages-grid">
+
+                    <article class="advantage-card">
+                        <div class="advantage-icon">⌕</div>
+                        <h3>Легко выбирать</h3>
+                        <p>
+                            Изучай каталог и находи товары
+                            в удобном формате.
+                        </p>
+                    </article>
+
+                    <article class="advantage-card">
+                        <div class="advantage-icon">▣</div>
+                        <h3>Всё в одном месте</h3>
+                        <p>
+                            Просматривай товары и добавляй
+                            понравившиеся в корзину.
+                        </p>
+                    </article>
+
+                    <article class="advantage-card">
+                        <div class="advantage-icon">↗</div>
+                        <h3>Удобный интерфейс</h3>
+                        <p>
+                            Переходи между страницами
+                            и управляй своими покупками.
+                        </p>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- BOTTOM CTA -->
+        <section class="bottom-cta">
+            <div class="container bottom-cta-inner">
+                <div class="bottom-cta-copy">
+                    <span class="footer-kicker">ТВОЙ СЛЕДУЮЩИЙ ШАГ</span>
+                    <h2>Готов к апгрейду<span>.</span></h2>
+                    <p>Подбери технику, которая подходит именно твоему ритму.</p>
+                </div>
+                <a class="bottom-cta-link" href="catalog.html">
+                    Открыть каталог <span aria-hidden="true">↗</span>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="home-footer">
+        <div class="container">
+            <div class="home-footer-main">
+                <div class="home-footer-brand">
+                    <a href="home.html" class="home-footer-logo">Ruslan's Final Project</a>
+                    <p>Технологии для твоих идей,<br>планов и новых открытий.</p>
+                    <span class="footer-stamp">TECH / STYLE / FUTURE</span>
+                </div>
+
+                <nav class="home-footer-nav" aria-label="Навигация по сайту">
+                    <h2>Исследуй</h2>
+                    <a href="catalog.html">Каталог</a>
+                    <a href="home.html#advantages">Преимущества</a>
+                    <a href="account.html">Мой аккаунт</a>
+                </nav>
+
+                <nav class="home-footer-nav" aria-label="Покупки">
+                    <h2>Твой выбор</h2>
+                    <a href="catalog.html">Все устройства <span aria-hidden="true">↗</span></a>
+                    <a href="cart.html" data-auth-cart>Корзина <span aria-hidden="true">↗</span></a>
+                    <a href="login.html">Войти в аккаунт <span aria-hidden="true">↗</span></a>
+                </nav>
+
+                <a class="home-footer-back" href="#top" aria-label="Вернуться наверх">↑</a>
+            </div>
+
+            <div class="home-footer-bottom">
+                <span>© 2026 Ruslan's Final Project. Магазин современной техники.</span>
+                <span><i aria-hidden="true"></i> Создано для твоего следующего шага</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="home.js"></script>
+    <script src="auth-ui.js"></script>
+</body>
+</html>
