@@ -45,7 +45,7 @@
           <div class="shop-form-heading">
             <span class="eyebrow">DROP US A LINE</span>
             <h2 id="shop-form-heading">Let's talk</h2>
-            <p>Fill in the details and we'll get your email ready.</p>
+            <p>The V1 API has no contact-message endpoint, so this form prepares an email in your mail app.</p>
           </div>
           <form id="shop-contact-form" class="shop-form">
             <label for="shop-name">Your name</label>
@@ -59,7 +59,7 @@
 
             <button class="shop-submit" type="submit">Send message <span aria-hidden="true">↗</span></button>
             <p id="shop-form-status" class="shop-form-status" role="status" aria-live="polite"></p>
-            <small class="shop-privacy-note">Your email app will open with your message. Nothing is sent or stored on this page.</small>
+            <small class="shop-privacy-note">Your message is not submitted to the API or stored on this page.</small>
           </form>
         </section>
       </div>
@@ -67,9 +67,9 @@
       <section class="container shop-products-section" aria-labelledby="my-products-heading">
         <div class="shop-products-heading">
           <div>
-            <span class="eyebrow">YOUR COLLECTION</span>
-            <h2 id="my-products-heading">My products</h2>
-            <p>Add and manage products saved to this browser and account.</p>
+            <span class="eyebrow">PRODUCT CATALOG</span>
+            <h2 id="my-products-heading">Available products</h2>
+            <p>Edit or delete products from the shared catalog. The API applies account permissions.</p>
           </div>
           <button class="shop-create-toggle" id="shop-create-toggle" type="button" aria-expanded="false" aria-controls="shop-product-form-panel">
             <span aria-hidden="true">＋</span> Create product
@@ -85,20 +85,18 @@
             <button class="shop-form-close" id="shop-product-cancel" type="button" aria-label="Cancel">×</button>
           </div>
           <form id="shop-product-form" class="shop-product-form">
-            <label for="shop-product-name">Product name</label>
-            <input id="shop-product-name" name="name" type="text" placeholder="e.g. Studio Headphones" maxlength="120" required />
+            <label for="shop-product-brand">Brand</label>
+            <input id="shop-product-brand" name="brand" type="text" placeholder="e.g. Sony" maxlength="120" required />
+
+            <label for="shop-product-name">Product name / model</label>
+            <input id="shop-product-name" name="model" type="text" placeholder="e.g. WH-1000XM5" maxlength="120" required />
 
             <label for="shop-product-price">Price (AZN)</label>
             <input id="shop-product-price" name="price" type="number" min="0.01" step="0.01" placeholder="299.99" required />
 
             <label for="shop-product-category">Category</label>
-            <select id="shop-product-category" name="category" required>
-              <option value="">Choose a category</option>
-              <option>Laptops</option>
-              <option>Phones</option>
-              <option>Audio</option>
-              <option>Accessories</option>
-              <option>Other</option>
+            <select id="shop-product-category" name="categoryId" required disabled>
+              <option value="">Loading categories...</option>
             </select>
 
             <label for="shop-product-image">Image URL <span>(optional)</span></label>
@@ -115,8 +113,9 @@
           </form>
         </div>
 
+        <p class="shop-form-status" id="shop-api-status" role="status" aria-live="polite"></p>
         <div class="shop-product-grid" id="shop-product-list" aria-live="polite"></div>
-        <p class="shop-storage-note">Products are saved in this browser and are not published to the shared catalog.</p>
+        <p class="shop-storage-note">Changes are sent to FakeRESTApi.Web V1. The API may restrict edits or deletion based on account permissions.</p>
       </section>
     </main>
 
