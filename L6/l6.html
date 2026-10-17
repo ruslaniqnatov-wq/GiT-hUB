@@ -1,11 +1,132 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <script src="l6.js"></script>
+
+<h1>API Homework</h1>
+
+<button onclick="getUsers()">GET</button>
+<button onclick="createUser()">POST</button>
+<button onclick="updateUser()">PUT</button>
+<button onclick="deleteUser()">DELETE</button>
+
+<script>
+
+// GET
+function getUsers(){
+
+fetch("https://jsonplaceholder.typicode.com/users")
+.then(function(response){
+    return response.json();
+})
+.then(function(data){
+
+    console.clear();
+
+    data.forEach(function(user){
+
+        console.log("ID:", user.id);
+        console.log("Name:", user.name);
+        console.log("Email:", user.email);
+       
+
+    });
+
+});
+
+}
+
+
+// POST
+function createUser(){
+
+fetch("https://jsonplaceholder.typicode.com/users",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+name:"Ruslan",
+email:"example@gmail.com"
+
+})
+
+})
+
+.then(function(response){
+    return response.json();
+})
+
+.then(function(data){
+
+console.log("POST:");
+console.log(data);
+
+});
+
+}
+
+
+// PUT
+function updateUser(){
+
+fetch("https://jsonplaceholder.typicode.com/users/1",{
+
+method:"PUT",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+name:"Ruslan Updated",
+email:"ruslan@gmail.com"
+
+})
+
+})
+
+.then(function(response){
+    return response.json();
+})
+
+.then(function(data){
+
+console.log("PUT:");
+console.log(data);
+
+});
+
+}
+
+
+// DELETE
+function deleteUser(){
+
+fetch("https://jsonplaceholder.typicode.com/users/5",{
+
+method:"DELETE"
+
+})
+
+.then(function(response){
+
+console.log("DELETE:");
+console.log(response);
+
+});
+
+}
+
+</script>
+
 </body>
 </html>

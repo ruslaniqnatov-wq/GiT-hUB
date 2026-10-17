@@ -1,53 +1,2689 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Светофор</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notes App</title>
 
-  <style>
-    .circle {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: gray;
-      margin-bottom: 20px;
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root{
+    --bg1:#4f46e5;
+    --bg2:#06b6d4;
+    --bg3:#7c3aed;
+
+    --white:#ffffff;
+    --light:#f5f7ff;
+    --text:#1e293b;
+
+    --primary:#4f46e5;
+    --secondary:#06b6d4;
+    --danger:#ef4444;
+    --success:#22c55e;
+
+    --shadow:0 20px 45px rgba(0,0,0,.18);
+    --radius:22px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow-x:hidden;
+
+    background:linear-gradient(
+        -45deg,
+        var(--bg1),
+        var(--bg2),
+        var(--bg3),
+        #2563eb
+    );
+
+    background-size:400% 400%;
+    animation:backgroundMove 18s ease infinite;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    width:550px;
+    height:550px;
+    border-radius:50%;
+    background:rgba(255,255,255,.15);
+    top:-180px;
+    left:-180px;
+    filter:blur(90px);
+    animation:blob1 14s infinite alternate;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    width:450px;
+    height:450px;
+    border-radius:50%;
+    background:rgba(255,255,255,.12);
+    bottom:-150px;
+    right:-150px;
+    filter:blur(90px);
+    animation:blob2 16s infinite alternate;
+}
+
+.container{
+
+    width:540px;
+
+    padding:35px;
+
+    border-radius:var(--radius);
+
+    background:rgba(255,255,255,.20);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.3);
+
+    box-shadow:var(--shadow);
+
+    transition:.4s;
+
+    animation:show .8s ease;
+}
+
+.container:hover{
+
+    transform:translateY(-6px);
+
+}
+
+h1{
+
+    text-align:center;
+
+    color:white;
+
+    font-size:38px;
+
+    font-weight:700;
+
+    margin-bottom:25px;
+
+    letter-spacing:3px;
+
+    text-shadow:0 6px 12px rgba(0,0,0,.3);
+
+}
+
+input,
+textarea{
+
+    width:100%;
+
+    padding:16px;
+
+    margin:10px 0;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:rgba(255,255,255,.18);
+
+    color:white;
+
+    font-size:15px;
+
+    transition:.35s;
+
+}
+
+input::placeholder,
+textarea::placeholder{
+
+    color:#eeeeee;
+
+}
+
+input:hover,
+textarea:hover{
+
+    background:rgba(255,255,255,.24);
+
+}
+
+input:focus,
+textarea:focus{
+
+    outline:none;
+
+    background:rgba(255,255,255,.30);
+
+    box-shadow:0 0 20px rgba(255,255,255,.35);
+
+    transform:scale(1.02);
+
+}
+
+textarea{
+
+    resize:none;
+
+    height:140px;
+
+}
+
+button{
+
+    padding:13px 22px;
+
+    border:none;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    margin-top:10px;
+
+    margin-right:8px;
+
+    background:linear-gradient(
+        45deg,
+        var(--secondary),
+        var(--primary)
+    );
+
+    transition:.35s;
+
+}
+
+button:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 12px 20px rgba(0,0,0,.25);
+
+}
+
+button:active{
+
+    transform:scale(.95);
+
+}
+
+#search{
+
+    margin-top:18px;
+
+}
+
+#notesList{
+
+    list-style:none;
+
+    margin-top:25px;
+
+}
+
+#notesList li{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:18px;
+
+    margin-bottom:18px;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.18);
+
+    color:white;
+
+    transition:.4s;
+
+}
+
+#notesList li:hover{
+
+    transform:translateX(8px);
+
+    box-shadow:0 15px 25px rgba(0,0,0,.18);
+
+}
+
+#notesList li::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+    width:60%;
+
+    height:100%;
+
+    background:rgba(255,255,255,.35);
+
+    transform:skewX(-25deg);
+
+}
+
+#notesList li:hover::before{
+
+    animation:shine .8s;
+
+}
+
+#notesList p{
+
+    line-height:1.7;
+
+    margin-bottom:12px;
+
+    word-break:break-word;
+
+}
+
+#notesList button{
+
+    background:linear-gradient(
+        45deg,
+        #ff416c,
+        #ff4b2b
+    );
+
+}
+
+#notesList button:hover{
+
+    box-shadow:0 0 18px rgba(255,90,90,.5);
+
+}
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:white;
+
+    border-radius:20px;
+
+}
+
+@keyframes show{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(35px);
+
     }
 
-    button {
-      padding: 10px;
-      margin: 5px;
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
     }
-  </style>
+
+}
+
+@keyframes shine{
+
+    from{
+
+        left:-120%;
+
+    }
+
+    to{
+
+        left:140%;
+
+    }
+
+}
+
+@keyframes backgroundMove{
+
+    0%{background-position:0% 50%;}
+
+    50%{background-position:100% 50%;}
+
+    100%{background-position:0% 50%;}
+
+}
+
+@keyframes blob1{
+
+    from{
+
+        transform:translate(0,0);
+
+    }
+
+    to{
+
+        transform:translate(120px,80px);
+
+    }
+
+}
+
+@keyframes blob2{
+
+    from{
+
+        transform:translate(0,0);
+
+    }
+
+    to{
+
+        transform:translate(-100px,-80px);
+
+    }
+
+}
+.container::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:22px;
+    padding:2px;
+    background:linear-gradient(
+        45deg,
+        #ffffff,
+        transparent,
+        #ffffff
+    );
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+    opacity:.35;
+    pointer-events:none;
+}
+
+.container{
+    position:relative;
+}
+
+h1::after{
+    content:"";
+    display:block;
+    width:120px;
+    height:4px;
+    margin:12px auto;
+    border-radius:20px;
+    background:linear-gradient(
+        90deg,
+        #06b6d4,
+        #ffffff,
+        #7c3aed
+    );
+}
+
+input,
+textarea{
+
+    border:1px solid rgba(255,255,255,.25);
+
+}
+
+input:focus,
+textarea:focus{
+
+    border-color:white;
+
+}
+
+button{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+button::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+    width:60%;
+
+    height:100%;
+
+    background:rgba(255,255,255,.35);
+
+    transform:skewX(-25deg);
+
+}
+
+button:hover::before{
+
+    animation:buttonLight .7s;
+
+}
+
+#notesList li{
+
+    backdrop-filter:blur(12px);
+
+}
+
+#notesList li::after{
+
+    content:"📝";
+
+    position:absolute;
+
+    right:15px;
+
+    top:15px;
+
+    opacity:.35;
+
+    font-size:24px;
+
+}
+
+#notesList li:hover{
+
+    background:rgba(255,255,255,.28);
+
+}
+
+#notesList button{
+
+    padding:10px 18px;
+
+    border-radius:10px;
+
+}
+
+#notesList button:hover{
+
+    transform:scale(1.05);
+
+}
+
+input,
+textarea,
+button{
+
+    transition:
+        background .3s,
+        transform .3s,
+        box-shadow .3s,
+        border .3s;
+
+}
+
+.container:hover{
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.25);
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:rgba(255,255,255,.15);
+
+}
+
+::selection{
+
+    background:#06b6d4;
+
+    color:white;
+
+}
+
+@media(max-width:650px){
+
+    .container{
+
+        width:94%;
+
+        padding:22px;
+
+    }
+
+    h1{
+
+        font-size:30px;
+
+    }
+
+    button{
+
+        width:100%;
+
+        margin-top:10px;
+
+    }
+
+}
+
+@keyframes buttonLight{
+
+    from{
+
+        left:-120%;
+
+    }
+
+    to{
+
+        left:180%;
+
+    }
+
+}
+
+@keyframes pulse{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.03);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+.container{
+
+    animation:
+        show .8s ease,
+        pulse 6s infinite;
+
+}
+.container::after{
+    content:"";
+    position:absolute;
+    inset:8px;
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,.08);
+    pointer-events:none;
+}
+
+input{
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.08)
+        );
+}
+
+textarea{
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.08)
+        );
+}
+
+input:hover,
+textarea:hover{
+
+    transform:translateY(-2px);
+
+}
+
+button{
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+
+}
+
+button:focus{
+
+    outline:none;
+
+    box-shadow:
+        0 0 0 4px rgba(255,255,255,.15);
+
+}
+
+#notesList li{
+
+    border:1px solid rgba(255,255,255,.18);
+
+}
+
+#notesList li:nth-child(even){
+
+    transform:rotate(.4deg);
+
+}
+
+#notesList li:nth-child(odd){
+
+    transform:rotate(-.4deg);
+
+}
+
+#notesList li:hover{
+
+    transform:translateY(-5px) scale(1.02);
+
+}
+
+#notesList li p{
+
+    font-size:15px;
+
+    color:#fff;
+
+}
+
+#notesList li::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+
+    height:220px;
+
+    background:rgba(255,255,255,.06);
+
+    border-radius:50%;
+
+    top:-120px;
+
+    right:-120px;
+
+}
+
+#notesList button{
+
+    transition:.35s;
+
+}
+
+#notesList button:hover{
+
+    letter-spacing:1px;
+
+}
+
+input::selection,
+textarea::selection{
+
+    background:white;
+
+    color:#333;
+
+}
+
+.container{
+
+    overflow:hidden;
+
+}
+
+.container:hover{
+
+    transform:translateY(-8px) scale(1.01);
+
+}
+
+h1{
+
+    animation:titleGlow 5s infinite;
+
+}
+
+@keyframes titleGlow{
+
+    0%{
+
+        text-shadow:0 0 5px rgba(255,255,255,.2);
+
+    }
+
+    50%{
+
+        text-shadow:
+            0 0 15px rgba(255,255,255,.5),
+            0 0 30px rgba(255,255,255,.2);
+
+    }
+
+    100%{
+
+        text-shadow:0 0 5px rgba(255,255,255,.2);
+
+    }
+
+}
+
+@keyframes floatCard{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-4px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+.container{
+
+    animation:
+        show .8s,
+        floatCard 7s ease-in-out infinite;
+
+}
+
+@media(max-width:500px){
+
+    h1{
+
+        font-size:28px;
+
+    }
+
+    input,
+    textarea{
+
+        font-size:14px;
+
+    }
+
+}
+.container{
+    transition:
+        transform .4s ease,
+        box-shadow .4s ease;
+}
+
+.container:hover{
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.25),
+        0 0 30px rgba(255,255,255,.15);
+}
+
+input,
+textarea{
+    background-size:200% 200%;
+}
+
+input:focus,
+textarea:focus{
+    background:rgba(255,255,255,.35);
+    animation:inputGlow 3s linear infinite;
+}
+
+button{
+    position:relative;
+    overflow:hidden;
+}
+
+button::after{
+    content:"";
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:0;
+    height:0;
+    background:rgba(255,255,255,.3);
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+    transition:.5s;
+}
+
+button:hover::after{
+    width:320px;
+    height:320px;
+}
+
+#notesList li{
+    cursor:pointer;
+}
+
+#notesList li:hover{
+    border-left:8px solid #fff;
+    transform:translateY(-6px) scale(1.03);
+}
+
+#notesList li p{
+    transition:.3s;
+}
+
+#notesList li:hover p{
+    letter-spacing:.5px;
+}
+
+@keyframes inputGlow{
+    0%{
+        box-shadow:0 0 10px rgba(255,255,255,.2);
+    }
+
+    50%{
+        box-shadow:0 0 25px rgba(255,255,255,.45);
+    }
+
+    100%{
+        box-shadow:0 0 10px rgba(255,255,255,.2);
+    }
+}
+.container{
+    isolation:isolate;
+}
+
+.container::before{
+    animation:borderGlow 8s linear infinite;
+}
+
+@keyframes borderGlow{
+
+    0%{
+        filter:hue-rotate(0deg);
+    }
+
+    100%{
+        filter:hue-rotate(360deg);
+    }
+
+}
+
+h1{
+
+    position:relative;
+
+}
+
+h1::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:-12px;
+
+    transform:translateX(-50%);
+
+    width:0;
+
+    height:4px;
+
+    border-radius:20px;
+
+    background:white;
+
+    transition:.5s;
+
+}
+
+.container:hover h1::before{
+
+    width:170px;
+
+}
+
+input,
+textarea{
+
+    backdrop-filter:blur(10px);
+
+}
+
+input:hover,
+textarea:hover{
+
+    transform:translateX(4px);
+
+}
+
+input:focus,
+textarea:focus{
+
+    transform:scale(1.03);
+
+}
+
+button{
+
+    overflow:hidden;
+
+}
+
+button span{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+button::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.35),
+        transparent
+    );
+
+    transform:translateX(-100%);
+
+}
+
+button:hover::after{
+
+    animation:lightMove .8s linear;
+
+}
+
+@keyframes lightMove{
+
+    to{
+
+        transform:translateX(100%);
+
+    }
+
+}
+
+#notesList{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:16px;
+
+}
+
+#notesList li{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+#notesList li:hover{
+
+    border-left:8px solid cyan;
+
+}
+
+#notesList li::after{
+
+    transition:.4s;
+
+}
+
+#notesList li:hover::after{
+
+    transform:rotate(15deg) scale(1.3);
+
+}
+
+#notesList p{
+
+    transition:.3s;
+
+}
+
+#notesList li:hover p{
+
+    transform:translateX(5px);
+
+}
+
+::-webkit-scrollbar{
+
+    background:transparent;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:linear-gradient(
+        #00c6ff,
+        #0072ff
+    );
+
+}
+
+@media(max-width:700px){
+
+    .container{
+
+        width:95%;
+
+    }
+
+}
+.container{
+    position:relative;
+}
+
+.container::after{
+    content:"";
+    position:absolute;
+    inset:-2px;
+    border-radius:24px;
+    background:linear-gradient(
+        45deg,
+        #00f5ff,
+        #7b2ff7,
+        #ff00aa,
+        #00f5ff
+    );
+    background-size:400% 400%;
+    animation:borderAnimation 8s linear infinite;
+    z-index:-1;
+    filter:blur(12px);
+    opacity:.6;
+}
+
+@keyframes borderAnimation{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+
+}
+
+input,
+textarea{
+
+    border:2px solid transparent;
+
+    background:
+        linear-gradient(rgba(255,255,255,.15),rgba(255,255,255,.15)) padding-box,
+        linear-gradient(45deg,#00f5ff,#7b2ff7) border-box;
+
+}
+
+input:focus,
+textarea:focus{
+
+    transform:scale(1.03);
+
+    box-shadow:
+        0 0 10px #00f5ff,
+        0 0 25px rgba(0,245,255,.35);
+
+}
+
+button{
+
+    background-size:250% 250%;
+
+    animation:buttonGradient 5s linear infinite;
+
+}
+
+@keyframes buttonGradient{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+
+}
+
+button:hover{
+
+    transform:translateY(-4px) scale(1.05);
+
+}
+
+#notesList li{
+
+    transition:
+        transform .35s,
+        box-shadow .35s,
+        background .35s;
+
+}
+
+#notesList li:hover{
+
+    background:rgba(255,255,255,.25);
+
+    transform:
+        rotate(.4deg)
+        translateY(-8px);
+
+}
+
+#notesList li::before{
+
+    animation:circleMove 8s linear infinite;
+
+}
+
+@keyframes circleMove{
+
+    0%{
+
+        transform:translate(0,0);
+
+    }
+
+    50%{
+
+        transform:translate(20px,-15px);
+
+    }
+
+    100%{
+
+        transform:translate(0,0);
+
+    }
+
+}
+
+#notesList button{
+
+    transition:.35s;
+
+}
+
+#notesList button:hover{
+
+    letter-spacing:2px;
+
+    box-shadow:0 0 18px rgba(255,255,255,.4);
+
+}
+
+h1{
+
+    animation:titleFloat 4s ease-in-out infinite;
+
+}
+
+@keyframes titleFloat{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-4px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+.container:hover{
+
+    transform:translateY(-8px) scale(1.01);
+
+}
+.container{
+    overflow:hidden;
+}
+
+.container::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:24px;
+    background:
+        radial-gradient(circle at 20% 20%,rgba(255,255,255,.12),transparent 25%),
+        radial-gradient(circle at 80% 30%,rgba(255,255,255,.10),transparent 30%),
+        radial-gradient(circle at 50% 80%,rgba(255,255,255,.08),transparent 30%);
+    pointer-events:none;
+    animation:floatLight 12s ease-in-out infinite;
+}
+
+@keyframes floatLight{
+    0%{
+        transform:translate(0,0) rotate(0deg);
+    }
+
+    50%{
+        transform:translate(10px,-10px) rotate(2deg);
+    }
+
+    100%{
+        transform:translate(0,0) rotate(0deg);
+    }
+}
+
+h1{
+    background:linear-gradient(90deg,#ffffff,#dbeafe,#ffffff);
+    background-size:200% auto;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:titleShine 6s linear infinite;
+}
+
+@keyframes titleShine{
+    to{
+        background-position:200% center;
+    }
+}
+
+input,
+textarea{
+    transition:
+        .35s transform,
+        .35s box-shadow,
+        .35s background;
+}
+
+input:hover,
+textarea:hover{
+    box-shadow:0 8px 20px rgba(255,255,255,.15);
+}
+
+button{
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
+
+button:hover{
+    box-shadow:
+        0 15px 30px rgba(0,0,0,.25),
+        0 0 20px rgba(255,255,255,.2);
+}
+
+#notesList li{
+    overflow:hidden;
+}
+
+#notesList li::after{
+    transition:.4s;
+}
+
+#notesList li:hover::after{
+    transform:scale(1.4) rotate(15deg);
+    opacity:.8;
+}
+
+#notesList li:hover{
+    border-left:8px solid #fff;
+}
+.container{
+    perspective:1000px;
+}
+
+.container:hover{
+    transform:
+        rotateX(2deg)
+        rotateY(-2deg)
+        translateY(-8px);
+}
+
+#notesList li{
+
+    transform-style:preserve-3d;
+
+}
+
+#notesList li:hover{
+
+    transform:
+        rotateX(3deg)
+        rotateY(-3deg)
+        scale(1.02);
+
+}
+
+#notesList li::before{
+
+    filter:blur(30px);
+
+    opacity:.5;
+
+}
+
+#notesList li::after{
+
+    transition:
+        transform .4s,
+        opacity .4s;
+
+}
+
+button{
+
+    background-size:300%;
+
+    animation:rainbowButton 10s linear infinite;
+
+}
+
+@keyframes rainbowButton{
+
+    0%{
+
+        background-position:0%;
+
+    }
+
+    100%{
+
+        background-position:300%;
+
+    }
+
+}
+
+button:hover{
+
+    letter-spacing:2px;
+
+}
+
+button:active{
+
+    filter:brightness(.9);
+
+}
+
+input,
+textarea{
+
+    transition:
+        transform .3s,
+        box-shadow .3s,
+        border-color .3s;
+
+}
+
+input:focus{
+
+    transform:translateX(6px);
+
+}
+
+textarea:focus{
+
+    transform:translateY(-4px);
+
+}
+
+#notesList li p{
+
+    transition:
+        transform .3s,
+        color .3s;
+
+}
+
+#notesList li:hover p{
+
+    transform:translateX(8px);
+
+    color:#ffffff;
+
+}
+
+#notesList li:hover{
+
+    background:
+
+    linear-gradient(
+        135deg,
+        rgba(255,255,255,.22),
+        rgba(255,255,255,.12)
+    );
+
+}
+
+.container::after{
+
+    animation:
+        rotateBorder 15s linear infinite;
+
+}
+
+@keyframes rotateBorder{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+body{
+
+    position:relative;
+
+}
+
+body::before{
+
+    animation:
+        floatOne 12s ease-in-out infinite;
+
+}
+
+body::after{
+
+    animation:
+        floatTwo 16s ease-in-out infinite;
+
+}
+
+@keyframes floatOne{
+
+    0%{
+
+        transform:translate(0,0);
+
+    }
+
+    50%{
+
+        transform:translate(80px,-50px);
+
+    }
+
+    100%{
+
+        transform:translate(0,0);
+
+    }
+
+}
+
+@keyframes floatTwo{
+
+    0%{
+
+        transform:translate(0,0);
+
+    }
+
+    50%{
+
+        transform:translate(-80px,50px);
+
+    }
+
+    100%{
+
+        transform:translate(0,0);
+
+    }
+
+}
+
+.container:hover h1{
+
+    transform:scale(1.03);
+
+}
+
+h1{
+
+    transition:.4s;
+
+}/* ===== GOD MODE ===== */
+
+.container{
+    transition:
+        transform .5s ease,
+        box-shadow .5s ease,
+        border-radius .5s ease;
+}
+
+.container:hover{
+    border-radius:28px;
+}
+
+input,
+textarea{
+
+    position:relative;
+
+}
+
+input:hover,
+textarea:hover{
+
+    border-color:#00e5ff;
+
+    background:rgba(255,255,255,.22);
+
+}
+
+input:focus,
+textarea:focus{
+
+    border-color:#00ffff;
+
+    box-shadow:
+        0 0 12px rgba(0,255,255,.4),
+        0 0 30px rgba(0,255,255,.25);
+
+}
+
+button{
+
+    overflow:hidden;
+
+}
+
+button::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:30px;
+
+    height:220%;
+
+    top:-60%;
+
+    left:-80px;
+
+    background:rgba(255,255,255,.45);
+
+    transform:rotate(25deg);
+
+}
+
+button:hover::before{
+
+    animation:laser .8s;
+
+}
+
+@keyframes laser{
+
+    from{
+
+        left:-80px;
+
+    }
+
+    to{
+
+        left:130%;
+
+    }
+
+}
+
+#notesList li{
+
+    position:relative;
+
+    backdrop-filter:blur(8px);
+
+}
+
+#notesList li::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:280px;
+
+    height:280px;
+
+    right:-170px;
+
+    top:-170px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.05);
+
+    transition:.6s;
+
+}
+
+#notesList li:hover::before{
+
+    transform:scale(1.4);
+
+}
+
+#notesList li::after{
+
+    content:"★";
+
+    font-size:18px;
+
+    color:white;
+
+    opacity:.3;
+
+}
+
+#notesList li:hover::after{
+
+    opacity:1;
+
+    transform:rotate(360deg);
+
+}
+
+#notesList li p{
+
+    transition:.4s;
+
+}
+
+#notesList li:hover p{
+
+    text-shadow:0 0 8px rgba(255,255,255,.4);
+
+}
+
+#notesList button{
+
+    transition:
+        transform .3s,
+        letter-spacing .3s,
+        box-shadow .3s;
+
+}
+
+#notesList button:hover{
+
+    transform:scale(1.08);
+
+    letter-spacing:2px;
+
+    box-shadow:
+        0 0 15px rgba(255,255,255,.3);
+
+}
+
+.container:hover{
+
+    animation:containerFloat 3s ease-in-out infinite;
+
+}
+
+@keyframes containerFloat{
+
+    0%{
+
+        transform:translateY(-6px);
+
+    }
+
+    50%{
+
+        transform:translateY(-12px);
+
+    }
+
+    100%{
+
+        transform:translateY(-6px);
+
+    }
+
+}
+
+body{
+
+    background-size:500% 500%;
+
+}
+
+body::before{
+
+    opacity:.6;
+
+}
+
+body::after{
+
+    opacity:.5;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#00ffff;
+
+}/* ===== EXTREME MODE ===== */
+
+.container{
+    transform-style:preserve-3d;
+    will-change:transform;
+}
+
+.container:hover{
+    transform:
+        perspective(1200px)
+        rotateX(4deg)
+        rotateY(-4deg)
+        translateY(-10px);
+}
+
+.container>*{
+    transform:translateZ(20px);
+}
+
+input,
+textarea{
+    transition:
+        .4s transform,
+        .4s box-shadow,
+        .4s border,
+        .4s background;
+}
+
+input:hover,
+textarea:hover{
+    transform:translateX(6px) scale(1.01);
+}
+
+input:focus,
+textarea:focus{
+    transform:translateY(-3px) scale(1.02);
+}
+
+button{
+    position:relative;
+    overflow:hidden;
+    isolation:isolate;
+}
+
+button::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(circle at center,
+        rgba(255,255,255,.45),
+        transparent 70%);
+    opacity:0;
+    transition:.4s;
+    z-index:-1;
+}
+
+button:hover::before{
+    opacity:1;
+}
+
+button::after{
+    content:"";
+    position:absolute;
+    left:-120%;
+    top:0;
+    width:80%;
+    height:100%;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.45),
+            transparent
+        );
+    transform:skewX(-25deg);
+}
+
+button:hover::after{
+    animation:flash .9s linear;
+}
+
+@keyframes flash{
+
+    to{
+
+        left:150%;
+
+    }
+
+}
+
+#notesList{
+
+    display:grid;
+
+    gap:18px;
+
+}
+
+#notesList li{
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:
+        transform .45s,
+        box-shadow .45s,
+        background .45s;
+
+}
+
+#notesList li:hover{
+
+    transform:
+        perspective(900px)
+        rotateY(-3deg)
+        scale(1.03);
+
+    box-shadow:
+        0 20px 35px rgba(0,0,0,.2);
+
+}
+
+#notesList li::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-40%;
+
+    background:
+        conic-gradient(
+            from 0deg,
+            transparent,
+            rgba(255,255,255,.18),
+            transparent,
+            rgba(255,255,255,.08),
+            transparent
+        );
+
+    animation:spin 9s linear infinite;
+
+}
+
+#notesList li>*{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+@keyframes spin{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+#notesList li:hover::before{
+
+    animation-duration:3s;
+
+}
+
+#notesList button{
+
+    backdrop-filter:blur(8px);
+
+}
+
+#notesList button:hover{
+
+    filter:brightness(1.15);
+
+}
+
+.container::before{
+
+    mix-blend-mode:screen;
+
+}
+
+h1{
+
+    transition:
+        .4s transform,
+        .4s letter-spacing;
+
+}
+
+.container:hover h1{
+
+    letter-spacing:5px;
+
+    transform:scale(1.04);
+
+}
+
+::-webkit-scrollbar{
+
+    width:12px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    border:3px solid transparent;
+
+    background-clip:padding-box;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    border-width:2px;
+
+}/* ===== MASTER MODE ===== */
+
+:root{
+    --glow1:#00e5ff;
+    --glow2:#8b5cf6;
+    --glow3:#ff2d95;
+}
+
+.container{
+
+    transition:
+        transform .5s,
+        box-shadow .5s,
+        filter .5s;
+
+}
+
+.container:hover{
+
+    filter:brightness(1.03);
+
+}
+
+.container::before{
+
+    opacity:.45;
+
+}
+
+.container::after{
+
+    opacity:.35;
+
+}
+
+input,
+textarea{
+
+    border:1px solid rgba(255,255,255,.2);
+
+    transition:
+        .4s,
+        background .4s,
+        border-color .4s;
+
+}
+
+input:hover{
+
+    border-color:var(--glow1);
+
+}
+
+textarea:hover{
+
+    border-color:var(--glow2);
+
+}
+
+input:focus{
+
+    box-shadow:
+        0 0 8px var(--glow1),
+        0 0 18px rgba(0,229,255,.25);
+
+}
+
+textarea:focus{
+
+    box-shadow:
+        0 0 8px var(--glow2),
+        0 0 18px rgba(139,92,246,.25);
+
+}
+
+button{
+
+    background-size:300%;
+
+    animation:gradientMove 6s linear infinite;
+
+}
+
+button:hover{
+
+    transform:
+        translateY(-5px)
+        scale(1.05);
+
+}
+
+button::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    radial-gradient(circle,
+    rgba(255,255,255,.35),
+    transparent 70%);
+
+    opacity:0;
+
+    transition:.4s;
+
+}
+
+button:hover::before{
+
+    opacity:1;
+
+}
+
+#notesList li{
+
+    background:
+
+    linear-gradient(
+        135deg,
+        rgba(255,255,255,.22),
+        rgba(255,255,255,.10)
+    );
+
+    border:1px solid rgba(255,255,255,.15);
+
+}
+
+#notesList li:hover{
+
+    border-left:10px solid white;
+
+    transform:
+        perspective(1000px)
+        rotateX(2deg)
+        rotateY(-2deg)
+        scale(1.03);
+
+}
+
+#notesList li::before{
+
+    filter:blur(40px);
+
+    animation:rotateGlow 10s linear infinite;
+
+}
+
+#notesList li::after{
+
+    font-size:22px;
+
+    transition:.4s;
+
+}
+
+#notesList li:hover::after{
+
+    transform:
+        rotate(720deg)
+        scale(1.4);
+
+}
+
+#notesList p{
+
+    transition:
+        color .4s,
+        letter-spacing .4s;
+
+}
+
+#notesList li:hover p{
+
+    letter-spacing:.7px;
+
+}
+
+::-webkit-scrollbar{
+
+    width:13px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:
+        linear-gradient(
+            #00e5ff,
+            #8b5cf6,
+            #ff2d95
+        );
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:
+        linear-gradient(
+            #ffffff,
+            #00e5ff,
+            #8b5cf6
+        );
+
+}
+
+@keyframes gradientMove{
+
+    0%{
+
+        background-position:0%;
+
+    }
+
+    100%{
+
+        background-position:300%;
+
+    }
+
+}
+
+@keyframes rotateGlow{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+.container{
+    animation:
+        floatContainer 8s ease-in-out infinite;
+}
+
+@keyframes floatContainer{
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    25%{
+        transform:translateY(-4px);
+    }
+
+    50%{
+        transform:translateY(-8px);
+    }
+
+    75%{
+        transform:translateY(-4px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+
+}
+
+.container::before{
+
+    background:
+        radial-gradient(circle at 10% 20%,rgba(255,255,255,.15),transparent 30%),
+        radial-gradient(circle at 80% 10%,rgba(255,255,255,.12),transparent 30%),
+        radial-gradient(circle at 50% 90%,rgba(255,255,255,.1),transparent 35%);
+
+    background-size:200% 200%;
+
+    animation:
+        backgroundGlow 15s linear infinite;
+
+}
+
+@keyframes backgroundGlow{
+
+    0%{
+
+        background-position:0% 50%;
+
+    }
+
+    50%{
+
+        background-position:100% 50%;
+
+    }
+
+    100%{
+
+        background-position:0% 50%;
+
+    }
+
+}
+
+input,
+textarea{
+
+    border-radius:16px;
+
+}
+
+input:hover,
+textarea:hover{
+
+    transform:
+        scale(1.01)
+        translateX(3px);
+
+}
+
+button{
+
+    text-shadow:
+        0 0 8px rgba(255,255,255,.4);
+
+}
+
+button:hover{
+
+    box-shadow:
+        0 0 12px rgba(255,255,255,.3),
+        0 0 25px rgba(0,255,255,.25);
+
+}
+
+button::before{
+
+    filter:blur(6px);
+
+}
+
+#notesList{
+
+    padding-bottom:20px;
+
+}
+
+#notesList li{
+
+    backdrop-filter:blur(18px);
+
+    border-top:1px solid rgba(255,255,255,.2);
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+#notesList li:hover{
+
+    transform:
+        perspective(1200px)
+        rotateX(2deg)
+        rotateY(-2deg)
+        translateY(-6px);
+
+}
+
+#notesList li::after{
+
+    transition:
+        transform .5s,
+        opacity .5s;
+
+}
+
+#notesList li:hover::after{
+
+    opacity:1;
+
+    transform:
+        rotate(360deg)
+        scale(1.6);
+
+}
+
+#notesList button{
+
+    border:1px solid rgba(255,255,255,.15);
+
+}
+
+#notesList button:hover{
+
+    transform:
+        scale(1.08);
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    box-shadow:
+        inset 0 0 10px rgba(255,255,255,.3);
+
+}
+
+h1{
+
+    position:relative;
+
+}
+
+h1::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:-8px;
+
+    width:0;
+
+    height:3px;
+
+    border-radius:10px;
+
+    transform:translateX(-50%);
+
+    background:white;
+
+    transition:.5s;
+
+}
+
+.container:hover h1::before{
+
+    width:180px;
+
+}
+
+body{
+
+    background-size:500% 500%;
+
+}
+</style>
+
 </head>
 <body>
 
-  <div class="circle" id="circle"></div>
+<div class="bg-animation">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
 
-  <button id="redBtn">Красный</button>
-  <button id="yellowBtn">Желтый</button>
-  <button id="greenBtn">Зеленый</button>
+<div class="container">
 
-  <p id="info">Выберите цвет</p>
+    <div class="logo">
+        📝
+    </div>
 
-  <script>
-    let circle = document.getElementById("circle");
-    let info = document.getElementById("info");
+    <h1>Notes App</h1>
 
-    document.getElementById("redBtn").onclick = function () {
-      circle.style.background = "red";
-      info.innerText = "Стой!";
-    };
+    <p class="subtitle">
+        Save your ideas forever
+    </p>
 
-    document.getElementById("yellowBtn").onclick = function () {
-      circle.style.background = "yellow";
-      info.innerText = "Жди!";
-    };
+    <input
+        type="text"
+        id="noteInput"
+        placeholder="Title..."
+    >
 
-    document.getElementById("greenBtn").onclick = function () {
-      circle.style.background = "green";
-      info.innerText = "Можно идти!";
-    };
-  </script>
+    <textarea
+        id="noteText"
+        placeholder="Write something..."
+    ></textarea>
+
+    <div class="buttons">
+
+        <button onclick="addNote()">
+            ➕ Add
+        </button>
+
+        <button onclick="clearNotes()">
+            🗑 Clear
+        </button>
+
+    </div>
+
+    <input
+        type="text"
+        id="search"
+        placeholder="🔍 Search..."
+        onkeyup="searchNotes()"
+    >
+
+    <ul id="notesList"></ul>
+
+</div>
+
+<div id="cursor"></div>
+
+
+</div>
+
+<script>
+
+let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+showNotes();
+
+function addNote(){
+
+    const title=document.getElementById("noteInput").value.trim();
+    const text=document.getElementById("noteText").value.trim();
+
+    if(title==="" && text===""){
+        alert("Write a note!");
+        return;
+    }
+
+    notes.push({
+        id:Date.now(),
+        text:title+" "+text
+    });
+
+    localStorage.setItem("notes",JSON.stringify(notes));
+
+    document.getElementById("noteInput").value="";
+    document.getElementById("noteText").value="";
+
+    showNotes();
+}
+
+function showNotes(){
+
+    const list=document.getElementById("notesList");
+
+    list.innerHTML="";
+
+    notes.forEach(note=>{
+
+        list.innerHTML+=`
+        <li>
+            <p>${note.text}</p>
+            <button onclick="deleteNote(${note.id})">Delete</button>
+        </li>
+        `;
+    });
+
+}
+
+function deleteNote(id){
+
+    notes=notes.filter(note=>note.id!==id);
+
+    localStorage.setItem("notes",JSON.stringify(notes));
+
+    showNotes();
+
+}
+
+function clearNotes(){
+
+    notes=[];
+
+    localStorage.removeItem("notes");
+
+    showNotes();
+
+}
+
+function searchNotes(){
+
+    const value=document.getElementById("search").value.toLowerCase();
+
+    const list=document.getElementById("notesList");
+
+    list.innerHTML="";
+
+    notes
+    .filter(note=>note.text.toLowerCase().includes(value))
+    .forEach(note=>{
+
+        list.innerHTML+=`
+        <li>
+            <p>${note.text}</p>
+            <button onclick="deleteNote(${note.id})">Delete</button>
+        </li>
+        `;
+
+    });
+
+}
+
+</script>
 
 </body>
 </html>
