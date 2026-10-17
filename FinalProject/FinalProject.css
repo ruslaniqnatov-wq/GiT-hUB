@@ -5111,7 +5111,7 @@ body.is-authenticated .home-footer-nav [data-auth-cart] {
   opacity: .88;
 }
 
-.header nav a[href="home.html"]::before {
+.header nav a[href="index.html"]::before {
   content: "⌂";
 }
 

@@ -32,7 +32,7 @@ async function login(event) {
         }
 
         localStorage.setItem("token", result.body.token);
-        location.href = "home.html";
+        location.href = "index.html";
 
     } catch (error) {
         console.error(error);
