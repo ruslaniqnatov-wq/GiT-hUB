@@ -4420,6 +4420,75 @@ body.is-authenticated .home-footer-nav [data-auth-cart] {
   color: white;
 }
 
+.catalog-favorite-button {
+  position: absolute;
+  z-index: 2;
+  top: 48px;
+  right: 11px;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, .8);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .9);
+  color: #68738a;
+  font-size: 19px;
+  line-height: 1;
+  box-shadow: 0 5px 14px rgba(29, 34, 60, .12);
+  transition: color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.catalog-favorite-button:hover {
+  color: #ec4b70;
+  transform: scale(1.1);
+}
+
+.catalog-favorite-button.is-favorite {
+  background: #fff0f3;
+  color: #e83e66;
+}
+
+.catalog-favorites-toggle {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 15px;
+  border: 1px solid #f2c5d0;
+  border-radius: 999px;
+  background: #fff7f8;
+  color: #bd3658;
+  font-size: 12px;
+  font-weight: 850;
+  white-space: nowrap;
+  transition: background var(--fx-speed), color var(--fx-speed), transform var(--fx-speed);
+}
+
+.catalog-favorites-toggle:hover,
+.catalog-favorites-toggle.is-active {
+  background: #e83e66;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.catalog-favorites-count {
+  display: grid;
+  min-width: 21px;
+  height: 21px;
+  padding: 0 5px;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(232, 62, 102, .12);
+  font-size: 10px;
+}
+
+.catalog-favorites-toggle.is-active .catalog-favorites-count,
+.catalog-favorites-toggle:hover .catalog-favorites-count {
+  background: rgba(255, 255, 255, .2);
+}
+
 .catalog-card-visual .card_img {
   position: relative;
   z-index: 1;
@@ -6874,6 +6943,48 @@ textarea:focus-visible {
   .shop-intro,
   .shop-form-panel {
     animation: none;
+  }
+}
+
+.header nav a.account-nav-link::before {
+  display: none;
+  content: none;
+}
+
+.account-nav-link {
+  gap: 7px;
+}
+
+.account-nav-avatar {
+  display: inline-grid;
+  width: 25px;
+  height: 25px;
+  flex: 0 0 25px;
+  place-items: center;
+  border: 1px solid rgba(20, 88, 212, .18);
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e8efff, #f8e8f3);
+  color: var(--blue, #1458d4);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.account-nav-name {
+  max-width: 130px;
+  overflow: hidden;
+  color: var(--blue, #1458d4);
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 900px) {
+  .account-nav-name {
+    max-width: 90px;
+  }
+}
+
+@media (max-width: 680px) {
+  .account-nav-name {
+    max-width: 100px;
   }
 
   .shop-contact-note,

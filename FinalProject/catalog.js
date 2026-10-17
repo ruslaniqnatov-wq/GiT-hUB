@@ -5,21 +5,90 @@ let categoriesList = [];
 let selectedCategory = "";
 let minimumRating = 0;
 let sortByPriceAscending = false;
+let showingFavoritesOnly = false;
+let favoriteProductIds = loadFavoriteProductIds();
 
 const productsBox = document.getElementById("products");
 const catalogCount = document.getElementById("catalog-count");
+const favoritesToggle = document.getElementById("favorites-toggle");
 
 productsBox.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-action]");
     if (!button) return;
 
     const productId = button.dataset.productId;
-    if (button.dataset.action === "details") {
+    if (button.dataset.action === "favorite") {
+        toggleFavorite(productId);
+    } else if (button.dataset.action === "details") {
         openProduct(productId);
     } else if (button.dataset.action === "add-to-cart") {
         addProductToCart(productId);
     }
 });
+
+favoritesToggle.addEventListener("click", () => {
+    showingFavoritesOnly = !showingFavoritesOnly;
+    favoritesToggle.setAttribute("aria-pressed", String(showingFavoritesOnly));
+    favoritesToggle.classList.toggle("is-active", showingFavoritesOnly);
+    applyCatalogFilters();
+});
+
+window.addEventListener("storage", (event) => {
+    if (event.key !== "favoriteProducts") return;
+    favoriteProductIds = parseFavoriteProductIds(event.newValue);
+    updateFavoritesCount();
+    applyCatalogFilters();
+});
+
+function parseFavoriteProductIds(value) {
+    if (!value) return new Set();
+
+    try {
+        const savedIds = JSON.parse(value);
+        if (!Array.isArray(savedIds)) {
+            throw new Error("Saved favorites are not an array.");
+        }
+        return new Set(savedIds.map(String));
+    } catch (error) {
+        console.error("Could not read saved favorites:", error);
+        alert("Не удалось загрузить избранное. Проверьте данные браузера.");
+        return new Set();
+    }
+}
+
+function loadFavoriteProductIds() {
+    try {
+        return parseFavoriteProductIds(localStorage.getItem("favoriteProducts"));
+    } catch (error) {
+        console.error("Could not access saved favorites:", error);
+        alert("Избранное недоступно в этом браузере.");
+        return new Set();
+    }
+}
+
+function updateFavoritesCount() {
+    favoritesToggle.querySelector("[data-favorite-count]").textContent = favoriteProductIds.size;
+}
+
+function toggleFavorite(productId) {
+    if (favoriteProductIds.has(String(productId))) {
+        favoriteProductIds.delete(String(productId));
+    } else {
+        favoriteProductIds.add(String(productId));
+    }
+
+    try {
+        localStorage.setItem("favoriteProducts", JSON.stringify([...favoriteProductIds]));
+    } catch (error) {
+        console.error("Could not save favorites:", error);
+        alert("Не удалось сохранить избранное. Проверьте настройки браузера.");
+        favoriteProductIds = loadFavoriteProductIds();
+        return;
+    }
+
+    updateFavoritesCount();
+    applyCatalogFilters();
+}
 
 async function loadProducts() {
     productsBox.setAttribute("aria-busy", "true");
@@ -73,12 +142,19 @@ function productCard(product, index) {
     const price = Number(product.price);
     const formattedPrice = Number.isFinite(price) ? `${price.toFixed(2)} AZN` : "Цена уточняется";
     const cardVariant = index % 4;
+    const isFavorite = favoriteProductIds.has(String(product.id));
 
     return `
         <article class="card catalog-card catalog-card-tone-${cardVariant}">
             <div class="catalog-card-visual">
                 <span class="catalog-card-category">${escapeHtml(categoryName)}</span>
                 <span class="catalog-card-number">${String(index + 1).padStart(2, "0")}</span>
+                <button type="button" class="catalog-favorite-button${isFavorite ? " is-favorite" : ""}"
+                    data-action="favorite" data-product-id="${escapeHtml(product.id)}"
+                    aria-label="${isFavorite ? "Убрать из избранного" : "Добавить в избранное"}: ${escapeHtml(productName)}"
+                    aria-pressed="${isFavorite}">
+                    <span aria-hidden="true">${isFavorite ? "♥" : "♡"}</span>
+                </button>
                 <img class="card_img" src="${imageUrl}" alt="${escapeHtml(productName)}" loading="lazy">
             </div>
             <div class="catalog-card-content">
@@ -103,7 +179,9 @@ function productCard(product, index) {
 
 function showProducts(products) {
     if (products.length === 0) {
-        productsBox.innerHTML = '<p class="catalog-message">По выбранным параметрам товаров не найдено. Попробуйте изменить фильтры.</p>';
+        productsBox.innerHTML = showingFavoritesOnly && favoriteProductIds.size === 0
+            ? '<p class="catalog-message">Пока нет избранных товаров. Нажмите на сердечко на карточке, чтобы сохранить понравившееся.</p>'
+            : '<p class="catalog-message">По выбранным параметрам товаров не найдено. Попробуйте изменить фильтры.</p>';
     } else {
         productsBox.innerHTML = products.map(productCard).join("");
     }
@@ -119,8 +197,9 @@ function applyCatalogFilters() {
         const matchesSearch = name.includes(searchText);
         const matchesCategory = !selectedCategory || String(product.categoryId) === selectedCategory;
         const matchesRating = getRating(product) >= minimumRating;
+        const matchesFavorite = !showingFavoritesOnly || favoriteProductIds.has(String(product.id));
 
-        return matchesSearch && matchesCategory && matchesRating;
+        return matchesSearch && matchesCategory && matchesRating && matchesFavorite;
     });
 
     if (sortByPriceAscending) {
@@ -255,5 +334,6 @@ function addProductToCart(id) {
     alert("Товар добавлен в корзину!");
 }
 
+updateFavoritesCount();
 loadProducts();
 loadCategories();

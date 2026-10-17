@@ -14,7 +14,7 @@ contactForm.addEventListener("submit", (event) => {
         return;
     }
 
-    const subject = encodeURIComponent(`Shop message from ${name}`);
+    const subject = encodeURIComponent(`Contact message from ${name}`);
     const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
     contactStatus.textContent = "Your email app is opening with your message.";
     window.location.href = `mailto:ruslaniqnatov@gmail.com?subject=${subject}&body=${body}`;
